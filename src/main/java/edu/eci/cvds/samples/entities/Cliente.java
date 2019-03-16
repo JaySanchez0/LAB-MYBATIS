@@ -9,6 +9,8 @@ import java.io.Serializable;
 import java.util.ArrayList;
 import java.util.LinkedList;
 
+import edu.eci.cvds.samples.services.ExcepcionServiciosAlquiler;
+
 public class Cliente implements Serializable{
     
     private String nombre;
@@ -56,7 +58,7 @@ public class Cliente implements Serializable{
         return documento;
     }
 
-    public void setDocumento(long documento) {
+    public void setDocumento(long documento){
         this.documento = documento;
     }
 

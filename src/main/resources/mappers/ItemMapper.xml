@@ -4,8 +4,39 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper">
-
-
-    
-    
+	<select parameterType="map" id="consultarItems" resultMap="ItemResult">
+		SELECT 
+		ITEMS.id as item_id,
+		ITEM.nombre as itemnombre,ITEM.descripcion itdescripcion , fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id,
+		TIPO.id as titemid, descripcion as tipodescripcion 
+		FROM VI_ITEMS ITEMS,VI_TIPOITEM TIPO
+		WHERE ITEMS.TIPOITEM_id = TIPO.id;
+	</select>
+	<select parameterType="map" id="consultarItem" resultMap="ItemResult">
+		SELECT 
+		ITEMS.id as item_id,
+		ITEMS.nombre as itemnombre,ITEMS.descripcion itdescripcion , fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id,
+		TIPO.id as titemid, TIPO.descripcion as tipodescripcion 
+		FROM VI_ITEMS ITEMS,VI_TIPOITEM TIPO
+		WHERE ITEMS.TIPOITEM_id = TIPO.id AND ITEMS.id = #{iditem}
+	</select>
+	<insert parameterType="map" id="insertarItem">
+		INSERT INTO VI_ITEMS VALUES(#{item.id},#{item.nombre},#{item.descripcion},#{item.fechaLanzamiento},#{item.tarifaxDia},#{item.formatoRenta},#{item.genero},#{item.tipo.id});
+	</insert>
+	<resultMap type='Item' id='ItemResult'>
+		    <id property='id' column='item_id'/>
+		    <result property='nombre' column='itemnombre'/>
+		    <result property='descripcion' column='itdescripcion'/>
+		    <result property='fechaLanzamiento' column='fechalanzamiento'/>  
+		    <result property='tarifaxDia' column='tarifaxdia'/>
+		    <result property='formatoRenta' column='formatorenta'/>
+		    <result property='genero' column='genero'/>          
+		    <association property="tipo" javaType="TipoItem" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult" column='TIPOITEM_id'>
+		    </association>
+	</resultMap>
+	<resultMap type='ItemRentado' id='ItemRentadoResult'>
+		    <id property='id' column='item_id'/>       
+		    <association property="item" javaType="Item" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult" column='item_id'>
+		    </association>
+	</resultMap>
 </mapper>

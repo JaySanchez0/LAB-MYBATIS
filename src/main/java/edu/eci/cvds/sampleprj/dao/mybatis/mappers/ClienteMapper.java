@@ -3,6 +3,7 @@ package edu.eci.cvds.sampleprj.dao.mybatis.mappers;
 import java.util.Date;
 import java.util.List;
 import org.apache.ibatis.annotations.Param;
+import org.mybatis.guice.transactional.Transactional;
 
 import edu.eci.cvds.samples.entities.Cliente;
 
@@ -12,7 +13,7 @@ import edu.eci.cvds.samples.entities.Cliente;
  */
 public interface ClienteMapper {
     
-    public Cliente consultarCliente(int id); 
+    public Cliente consultarCliente(@Param("idcli") long id); 
     
     /**
      * Registrar un nuevo item rentado asociado al cliente identificado
@@ -22,15 +23,18 @@ public interface ClienteMapper {
      * @param fechainicio
      * @param fechafin 
      */
-    public void agregarItemRentadoACliente(int id, 
-            int idit, 
-            Date fechainicio,
-            Date fechafin);
+    public void agregarItemRentadoACliente(@Param("idc") int id , 
+            @Param("iditem") int idit, 
+            @Param("inicio") Date fechainicio,
+            @Param("fin") Date fechafin);
 
     /**
      * Consultar todos los clientes
      * @return 
      */
     public List<Cliente> consultarClientes();
+    @Transactional
+    public void registrarCliente(@Param("documento") long documento,@Param("nombre") String nombre,@Param("telefono") String telefono,
+    		@Param("direccion") String direccion,@Param("email") String email);
     
 }

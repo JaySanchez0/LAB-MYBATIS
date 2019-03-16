@@ -21,10 +21,23 @@ package edu.eci.cvds.samples.services.client;
 import java.io.IOException;
 import java.io.InputStream;
 import java.sql.SQLException;
+import java.util.ArrayList;
+import java.util.Date;
+import java.util.List;
+
 import org.apache.ibatis.io.Resources;
 import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
+
+import edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
+import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
+import edu.eci.cvds.samples.entities.Cliente;
+import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.ItemRentado;
+import edu.eci.cvds.samples.services.ServiciosAlquiler;
+import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
 
 /**
  *
@@ -64,15 +77,22 @@ public class MyBatisExample {
 
         
         //Crear el mapper y usarlo: 
-        //ClienteMapper cm=sqlss.getMapper(ClienteMapper.class)
-        //cm...
-        
-        
-        
-        sqlss.commit();
+        ClienteMapper cm= sqlss.getMapper(ClienteMapper.class);
+        System.out.println(cm.consultarCliente(0));
+ 		sqlss.commit();
         
         
         sqlss.close();
+
+        //cm...
+        ServiciosAlquilerFactory ser = ServiciosAlquilerFactory.getInstance();
+        ServiciosAlquiler s = ser.getServiciosAlquiler();
+        try {
+			System.out.println(s.consultarCliente(0));
+		} catch (ExcepcionServiciosAlquiler e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
 
         
         
