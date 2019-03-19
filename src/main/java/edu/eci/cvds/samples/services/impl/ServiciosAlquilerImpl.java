@@ -39,10 +39,9 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
        throw new UnsupportedOperationException("Not supported yet.");
    }
-
    @Override
-   public List<Cliente> consultarClientes() throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+   public List<Cliente> consultarClientes(){
+       return clienteDAO.consultarClientes();
    }
 
    @Override
@@ -81,7 +80,8 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+	   if(consultarCliente(c.getDocumento())!=null) throw new ExcepcionServiciosAlquiler("Ya existe este cliente");
+       clienteDAO.agregarCliente(c);
    }
 
    @Override
@@ -102,4 +102,15 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    public void vetarCliente(long docu, boolean estado) throws ExcepcionServiciosAlquiler {
        throw new UnsupportedOperationException("Not supported yet."); //To change body of generated methods, choose Tools | Templates.
    }
+
+@Override
+public List<ItemRentado> consultarItemNoEntregados(Cliente c) {
+	return itemDAO.consultarItemNoEntregados(c);
+}
+
+@Override
+public void agregarCliente(Cliente c) {
+	clienteDAO.agregarCliente(c);
+	
+}
 }

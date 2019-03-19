@@ -30,14 +30,13 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
-import edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
-import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.samples.entities.Cliente;
-import edu.eci.cvds.samples.entities.Item;
 import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
+
+
 
 /**
  *
@@ -85,15 +84,15 @@ public class MyBatisExample {
         sqlss.close();
 
         //cm...
-        ServiciosAlquilerFactory ser = ServiciosAlquilerFactory.getInstance();
-        ServiciosAlquiler s = ser.getServiciosAlquiler();
-        try {
-			System.out.println(s.consultarCliente(0));
-		} catch (ExcepcionServiciosAlquiler e) {
-			// TODO Auto-generated catch block
-			e.printStackTrace();
-		}
-
+        ServiciosAlquilerFactory fact = ServiciosAlquilerFactory.getInstance();
+        ServiciosAlquilerFactory alquiler=fact.getInstance();
+        ServiciosAlquiler serv = fact.getServiciosAlquiler();
+        Cliente c = new Cliente();
+        c.setDocumento(123456);
+        List<ItemRentado> it = serv.consultarItemNoEntregados(c);
+        for(ItemRentado ret: it) {
+        	System.out.println(ret.getId());
+        }
         
         
     }

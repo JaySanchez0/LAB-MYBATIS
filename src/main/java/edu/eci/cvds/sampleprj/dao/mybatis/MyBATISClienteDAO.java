@@ -10,17 +10,18 @@ import org.apache.ibatis.session.SqlSessionFactory;
 import com.google.inject.Inject;
 
 import edu.eci.cvds.sampleprj.dao.ClienteDAO;
+import edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.cvds.samples.entities.Cliente;
-import edu.eci.cvds.samples.services.conection.conect;
 
 public class MyBATISClienteDAO implements ClienteDAO{
 	@Inject
 	private ClienteMapper maper;
 	public MyBATISClienteDAO() {
 	}
-	public Cliente getCliente(long doc) {
+	public Cliente getCliente(long doc) throws ExcepcionServiciosAlquiler {
 		Cliente c = maper.consultarCliente(doc);
+		if(c==null) throw new ExcepcionServiciosAlquiler("No existe cliente");
 		return c;
 	}
 	@Override
@@ -35,8 +36,13 @@ public class MyBATISClienteDAO implements ClienteDAO{
 	}
 	@Override
 	public List<Cliente> consultarClientes() {
-		List<Cliente> cli = maper.consultarClientes();
-		return cli;
+		return maper.consultarClientes();
 	}
+	@Override
+	public void agregarCliente(Cliente c) {
+		maper.agregarCliente(c);
+		
+	}
+
 
 }

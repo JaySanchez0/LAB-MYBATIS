@@ -26,8 +26,8 @@ PUBLIC "-//mybatis.org//DTD Config 3.0//EN"
    <mappers>
        <mapper resource="mappers/ClienteMapper.xml"></mapper>
        <mapper resource="mappers/ItemMapper.xml"></mapper>
-       <mapper resource="mappers/ItemRentadoMapper.xml"></mapper>
        <mapper resource="mappers/TipoItemMapper.xml"></mapper>
+       <mapper resource="mappers/ItemRentadoMapper.xml"></mapper> 
    </mappers> 
 
 </configuration>

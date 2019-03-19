@@ -1,4 +1,5 @@
 package edu.eci.cvds.test;
+
 import java.util.ArrayList;
 import java.util.List;
 
@@ -32,7 +33,6 @@ public class ServiciosAlquilerTest {
 
     @Before
     public void setUp() {
-    	
     }
 
     @Test
@@ -42,12 +42,57 @@ public class ServiciosAlquilerTest {
             try {
                 Cliente cliente = serviciosAlquiler.consultarCliente(documento);
             } catch(IndexOutOfBoundsException e) {
-                r = true;
+                r = false;
             } catch (edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
-				// TODO Auto-generated catch block
-				e.printStackTrace();
+				r= true;
 			}
             return r;
         });
     }
+    public Gen<Cliente> clientes(){
+    	return integers().allPositive().zip(strings().allPossible().ofLength(7), (doc,nombre) -> new Cliente(nombre,doc,"none","none","none"));
+    }
+    public Gen<Cliente[]> clientesArray(){
+    	Gen<Cliente[]> cliente = hk->{
+    		Cliente[] arr = new Cliente[7];
+    		for(int i=0;i<7;i++) {
+    			arr[i] = clientes().generate(hk);
+    		}
+    		return arr;
+    		
+    	};
+    	return cliente;
+    }
+    @Test
+    public void noDeberiaPermitirInsertarClientesConIgualDocumento() {
+    	qt().forAll(clientesArray()).check(client->{
+    		for(Cliente c: client) {
+				try {
+					serviciosAlquiler.registrarCliente(c);
+				} catch (edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
+					// TODO Auto-generated catch block
+					return true;
+				}
+			}
+			try {
+				serviciosAlquiler.registrarCliente(client[0]);
+			} catch (edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
+				return true;
+			}
+				return false;
+    	});
+    }
+    	@Test
+    	public void deberiaAgregarUnCliente() {
+    		qt().forAll(clientes()).check(c->{
+    			try {
+    				serviciosAlquiler.registrarCliente(c);
+    				return serviciosAlquiler.consultarCliente(c.getDocumento())!=null;
+    			}
+    			catch(edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
+    				return true;
+    			}
+    		});
+    	}
+    	
 }

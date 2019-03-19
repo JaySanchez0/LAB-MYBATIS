@@ -242,4 +242,16 @@ public class ServiciosAlquilerItemsStub implements ServiciosAlquiler {
        clientes.put(c3.getDocumento(), c3);
 
    }
+
+@Override
+public List<ItemRentado> consultarItemNoEntregados(Cliente c) {
+	// TODO Auto-generated method stub
+	return null;
+}
+
+@Override
+public void agregarCliente(Cliente c) {
+	// TODO Auto-generated method stub
+	
+}
 }
