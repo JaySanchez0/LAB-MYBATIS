@@ -45,7 +45,7 @@ public class ServiciosAlquilerTest {
                 r = false;
             } catch (edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
 				r= true;
-			}
+			} 
             return r;
         });
     }

@@ -1,0 +1,28 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:p="http://primefaces.org/ui">
+	 <h:head><title>Main</title></h:head>
+	 <h:outputLabel>Hola</h:outputLabel>
+	 <h:body>
+	 <h:form id="usuarios_form">
+	 <p:dataTable value="#{clienteBean.getClientes()}" var="cli" border="1" style="border: 1px solid black; border-collapse: collapse;">
+	 	<p:column headerText="Nombre: ">${cli.getNombre()}</p:column>
+	 	<p:column headerText="Documento: ">${cli.getDocumento()}</p:column>
+	 	<p:column headerText="Telefono: ">${cli.getTelefono()}</p:column>
+	 	<p:column headerText="Direccion: ">${cli.getDireccion()}</p:column>
+	 	<p:column headerText="Email">${cli.getEmail()}</p:column>
+	 	<p:column headerText="vetado">${cli.isVetado()}</p:column>
+	 </p:dataTable>
+	 </h:form>
+	 <br></br>
+	 <table border="1" style="border: 1px solid black; border-collapse: collapse;">
+	 	<tr><td colspan="2" style="background:#5F9EA0;"> <center>Registro nuevos clientes</center></td></tr>
+	 	<tr><td>Nombre: </td><td><h:inputText value="#{clienteBean.nombre}"></h:inputText></td></tr>
+	 	<tr><td>Documento: </td><td><h:inputText value="#{clienteBean.documento}"></h:inputText></td></tr> 
+	 	<tr><td>Telefono: </td><td><h:inputText value="#{clienteBean.telefono}"></h:inputText></td></tr> 
+	 	<tr><td>Direccion: </td><td><h:inputText value="#{clienteBean.direccion}"></h:inputText></td></tr>  
+	 	<tr><td colspan="2"><center><p:commandLink value="Registrar Cliente" update="usuarios_form" actionListener="#{clienteBean.registrarCliente()}"></p:commandLink></center></td></tr>
+	 </table>
+ </h:body>
+</html>

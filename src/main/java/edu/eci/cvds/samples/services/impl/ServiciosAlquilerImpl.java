@@ -80,8 +80,15 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
-	   if(consultarCliente(c.getDocumento())!=null) throw new ExcepcionServiciosAlquiler("Ya existe este cliente");
-       clienteDAO.agregarCliente(c);
+	   Cliente cliente = null;
+	   try {
+		   cliente = consultarCliente(c.getDocumento());
+	   }
+	   catch(ExcepcionServiciosAlquiler e) {
+		   
+	   }
+		   if(consultarCliente(c.getDocumento())!=null) throw new ExcepcionServiciosAlquiler("Ya existe este cliente");
+	       clienteDAO.agregarCliente(c);
    }
 
    @Override
