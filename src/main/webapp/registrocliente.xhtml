@@ -22,7 +22,7 @@ xmlns:p="http://primefaces.org/ui">
 	 	<tr><td>Telefono: </td><td><h:inputText value="#{clienteBean.telefono}"></h:inputText></td></tr> 
 	 	<tr><td>Direccion: </td><td><h:inputText value="#{clienteBean.direccion}"></h:inputText></td></tr>
 	 	<tr><td>Email: </td><td><h:inputText value="#{clienteBean.email}"></h:inputText></td></tr>    
-	 	<tr><td colspan="2"><center><p:commandLink value="Registrar Cliente" update="usuarios_form" actionListener="#{clienteBean.registrarCliente()}"></p:commandLink></center></td></tr>
+	 	<tr><td colspan="2"><center><p:commandButton value="Registrar Cliente" update="usuarios_form" actionListener="#{clienteBean.registrarCliente()}"></p:commandButton></center></td></tr>
 	 </table>
 	 </h:form>
  </h:body>

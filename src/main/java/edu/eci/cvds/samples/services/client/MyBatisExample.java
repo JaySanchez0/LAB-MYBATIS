@@ -88,15 +88,15 @@ public class MyBatisExample {
         ServiciosAlquilerFactory fact = ServiciosAlquilerFactory.getInstance();
         ServiciosAlquilerFactory alquiler=fact.getInstance();
         ServiciosAlquiler serv = fact.getServiciosAlquiler();
-        try {
-			serv.consultarCliente(0);
+        List<Cliente> clients;
+		try {
+			clients = serv.consultarClientes();
+			for(Cliente c:clients) {
+	        	System.out.println(c.getDocumento()+" "+c.getNombre());
+			}
 		} catch (ExcepcionServiciosAlquiler e) {
-			// TODO Auto-generated catch block
 			e.printStackTrace();
 		}
-        
+        }
         
     }
-
-
-}

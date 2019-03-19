@@ -13,8 +13,10 @@
 		RENTADO.id rentado_id,Clientes_documento,ITEMS_id,fechainiciorenta,fechafinrenta,
 		ITEMS.id as item_id,ITEMS.nombre as itemnombre,ITEMS.descripcion itdescripcion ,fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id,
 		TIPO.id as titemid, TIPO.descripcion as tipodescripcion 
-		FROM VI_CLIENTES CLIENTES, VI_ITEMRENTADO RENTADO,VI_ITEMS ITEMS,VI_TIPOITEM TIPO
-		WHERE CLIENTES.documento = RENTADO.CLIENTES_documento AND RENTADO.ITEMS_id = ITEMS.id AND ITEMS.TIPOITEM_id = TIPO.id 
+		FROM VI_CLIENTES CLIENTES LEFT JOIN VI_ITEMRENTADO RENTADO ON CLIENTES.documento = RENTADO.CLIENTES_documento 
+		LEFT JOIN VI_ITEMS ITEMS ON RENTADO.ITEMS_id = ITEMS.id 
+		LEFT JOIN VI_TIPOITEM TIPO ON ITEMS.TIPOITEM_id = TIPO.id ;
+
 	</select>
 	<select parameterType="map" id="consultarCliente" resultMap="ClienteResult">
 		SELECT  CLIENTES.documento,CLIENTES.nombre, CLIENTES.telefono,CLIENTES.direccion,CLIENTES.email,CLIENTES.vetado, 
