@@ -249,9 +249,4 @@ public List<ItemRentado> consultarItemNoEntregados(Cliente c) {
 	return null;
 }
 
-@Override
-public void agregarCliente(Cliente c) {
-	// TODO Auto-generated method stub
-	
-}
 }

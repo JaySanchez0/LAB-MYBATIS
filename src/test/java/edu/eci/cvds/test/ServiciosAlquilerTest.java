@@ -37,20 +37,19 @@ public class ServiciosAlquilerTest {
 
     @Test
     public void emptyDB() {
-        qt().forAll(longs().from(1).upTo(1000)).check((documento) -> {
+        qt().forAll(longs().from(1).upTo(100)).check((documento) -> {
             boolean r = false;
             try {
                 Cliente cliente = serviciosAlquiler.consultarCliente(documento);
-            } catch(IndexOutOfBoundsException e) {
-                r = false;
-            } catch (edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
+            }
+            catch (edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
 				r= true;
 			} 
             return r;
         });
     }
     public Gen<Cliente> clientes(){
-    	return integers().allPositive().zip(strings().allPossible().ofLength(7), (doc,nombre) -> new Cliente(nombre,doc,"none","none","none"));
+    	return integers().allPositive().zip(strings().allPossible().ofLength(7), (doc,nombre) -> new Cliente(nombre,doc,"juan","hjsh","hghsg"));
     }
     public Gen<Cliente[]> clientesArray(){
     	Gen<Cliente[]> cliente = hk->{
@@ -63,27 +62,8 @@ public class ServiciosAlquilerTest {
     	};
     	return cliente;
     }
-    @Test
-    public void noDeberiaPermitirInsertarClientesConIgualDocumento() {
-    	qt().forAll(clientesArray()).check(client->{
-    		for(Cliente c: client) {
-				try {
-					serviciosAlquiler.registrarCliente(c);
-				} catch (edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
-					// TODO Auto-generated catch block
-					return true;
-				}
-			}
-			try {
-				serviciosAlquiler.registrarCliente(client[0]);
-			} catch (edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
-				return true;
-			}
-				return false;
-    	});
-    }
     	@Test
-    	public void deberiaAgregarUnCliente() {
+    	public void deberiaAgregarUnClienteQueNoExista() {
     		qt().forAll(clientes()).check(c->{
     			try {
     				serviciosAlquiler.registrarCliente(c);

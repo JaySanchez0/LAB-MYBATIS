@@ -84,11 +84,11 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 	   try {
 		   cliente = consultarCliente(c.getDocumento());
 	   }
-	   catch(ExcepcionServiciosAlquiler e) {
-		   
+	   catch(ExcepcionServiciosAlquiler e) {   
+		   cliente = null;
 	   }
-		   if(consultarCliente(c.getDocumento())!=null) throw new ExcepcionServiciosAlquiler("Ya existe este cliente");
-	       clienteDAO.agregarCliente(c);
+	   if(cliente!=null) throw new ExcepcionServiciosAlquiler("Ya existe este cliente");
+	   clienteDAO.agregarCliente(c);
    }
 
    @Override
@@ -115,9 +115,4 @@ public List<ItemRentado> consultarItemNoEntregados(Cliente c) {
 	return itemDAO.consultarItemNoEntregados(c);
 }
 
-@Override
-public void agregarCliente(Cliente c) {
-	clienteDAO.agregarCliente(c);
-	
-}
 }

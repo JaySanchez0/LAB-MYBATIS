@@ -37,6 +37,5 @@ public interface ClienteMapper {
     public void registrarCliente(@Param("documento") long documento,@Param("nombre") String nombre,@Param("telefono") String telefono,
     		@Param("direccion") String direccion,@Param("email") String email);
 
-	public void agregarCliente(@Param("cliente") Cliente c);
     
 }

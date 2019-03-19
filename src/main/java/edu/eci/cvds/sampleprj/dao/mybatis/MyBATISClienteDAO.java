@@ -40,7 +40,7 @@ public class MyBATISClienteDAO implements ClienteDAO{
 	}
 	@Override
 	public void agregarCliente(Cliente c) {
-		maper.agregarCliente(c);
+		registrarCliente(c.getDocumento(),c.getNombre(),c.getTelefono(),c.getDireccion(),c.getEmail());
 		
 	}
 

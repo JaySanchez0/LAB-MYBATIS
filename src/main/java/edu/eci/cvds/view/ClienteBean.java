@@ -23,10 +23,8 @@ public class ClienteBean extends BasePageBean{
 	private String email;
 	private boolean vetado;
 	public ClienteBean() {
-		System.out.println("Entro");
 		Injector i = super.getInjector();
 		serv = i.getInstance(ServiciosAlquilerImpl.class);
-		System.out.println("Salio");
 	}
 	public List<Cliente> getClientes(){
 		List<Cliente> clientes=  serv.consultarClientes();
@@ -70,6 +68,7 @@ public class ClienteBean extends BasePageBean{
 	}
 	public void registrarCliente() {
 		try {
+			System.out.println(nombre+" "+documento+" ");
 			serv.registrarCliente(new Cliente(nombre, documento, telefono, direccion, email));
 		} catch (ExcepcionServiciosAlquiler e) {
 			System.out.println(e.getMessage());

@@ -14,7 +14,7 @@ public interface ServiciosAlquiler {
    public abstract int valorMultaRetrasoxDia(int itemId) throws UnsupportedOperationException;
 
    public abstract Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler;
-   public abstract void agregarCliente(Cliente c);
+   public abstract void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler;
    /**
    * @obj Consultar los items que tenga en su poder un cliente
    * @param idcliente identificador del cliente
@@ -66,7 +66,6 @@ public interface ServiciosAlquiler {
    */
    public abstract void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler;
 
-   public abstract void registrarCliente(Cliente p) throws ExcepcionServiciosAlquiler;
 
    /**
    * @obj consultar el costo del alquiler de un item

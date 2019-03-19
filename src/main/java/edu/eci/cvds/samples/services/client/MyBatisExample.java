@@ -30,6 +30,7 @@ import org.apache.ibatis.session.SqlSession;
 import org.apache.ibatis.session.SqlSessionFactory;
 import org.apache.ibatis.session.SqlSessionFactoryBuilder;
 
+import edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ClienteMapper;
 import edu.eci.cvds.samples.entities.Cliente;
 import edu.eci.cvds.samples.entities.ItemRentado;
@@ -87,12 +88,12 @@ public class MyBatisExample {
         ServiciosAlquilerFactory fact = ServiciosAlquilerFactory.getInstance();
         ServiciosAlquilerFactory alquiler=fact.getInstance();
         ServiciosAlquiler serv = fact.getServiciosAlquiler();
-        Cliente c = new Cliente();
-        c.setDocumento(123456);
-        List<ItemRentado> it = serv.consultarItemNoEntregados(c);
-        for(ItemRentado ret: it) {
-        	System.out.println(ret.getId());
-        }
+        try {
+			serv.consultarCliente(0);
+		} catch (ExcepcionServiciosAlquiler e) {
+			// TODO Auto-generated catch block
+			e.printStackTrace();
+		}
         
         
     }
