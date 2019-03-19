@@ -1,5 +1,7 @@
 ## Enlaces
-#### https://video-master-pro.herokuapp.com/
+#### This is a video renter app
+#### https://video-master-pro.herokuapp.com/ o https://video-master-pro.herokuapp.com/faces/registrocliente.xhtml
+### 
 
 ## My batis
 
