@@ -32,8 +32,11 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler {
-       return clienteDAO.getCliente(docu);
+       Cliente cli =  clienteDAO.getCliente(docu);
+       if(cli==null) throw new ExcepcionServiciosAlquiler("No existe Cliente.");
+       return cli;
    }
+   
 
    @Override
    public List<ItemRentado> consultarItemsCliente(long idcliente) throws ExcepcionServiciosAlquiler {
@@ -80,15 +83,21 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 
    @Override
    public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
-	   Cliente cliente = null;
+	   boolean existenClientes = false;
 	   try {
-		   cliente = consultarCliente(c.getDocumento());
+		   consultarCliente(c.getDocumento());
+		   existenClientes = true;
 	   }
-	   catch(ExcepcionServiciosAlquiler e) {   
-		   cliente = null;
+	   catch(ExcepcionServiciosAlquiler e) {
+		   try {
+			   consultarCliente(c.getEmail());
+			   existenClientes = true;
+		   }
+		   catch(ExcepcionServiciosAlquiler f) {
+			   clienteDAO.agregarCliente(c);   
+		   }
 	   }
-	   if(cliente!=null) throw new ExcepcionServiciosAlquiler("Ya existe este cliente");
-	   clienteDAO.agregarCliente(c);
+	   if(existenClientes) throw new ExcepcionServiciosAlquiler("Ya existe este cliente");
    }
 
    @Override
@@ -113,6 +122,14 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
 @Override
 public List<ItemRentado> consultarItemNoEntregados(Cliente c) {
 	return itemDAO.consultarItemNoEntregados(c);
+}
+
+@Override
+public Cliente consultarCliente(String correo) throws ExcepcionServiciosAlquiler {
+	Cliente c = null;
+	c = clienteDAO.getCliente(correo);
+	if(c==null) throw new ExcepcionServiciosAlquiler("No existe Cliente.");
+	return c;
 }
 
 }

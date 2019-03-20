@@ -68,7 +68,6 @@ public class ClienteBean extends BasePageBean{
 	}
 	public void registrarCliente() {
 		try {
-			System.out.println(nombre+" "+documento+" ");
 			serv.registrarCliente(new Cliente(nombre, documento, telefono, direccion, email));
 		} catch (ExcepcionServiciosAlquiler e) {
 			System.out.println(e.getMessage());

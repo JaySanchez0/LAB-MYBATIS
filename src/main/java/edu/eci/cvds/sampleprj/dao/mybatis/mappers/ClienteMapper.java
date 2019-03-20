@@ -36,6 +36,6 @@ public interface ClienteMapper {
     @Transactional
     public void registrarCliente(@Param("documento") long documento,@Param("nombre") String nombre,@Param("telefono") String telefono,
     		@Param("direccion") String direccion,@Param("email") String email);
-
+    public Cliente getCliente(@Param("correo") String email);
     
 }

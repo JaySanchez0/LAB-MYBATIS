@@ -249,4 +249,10 @@ public List<ItemRentado> consultarItemNoEntregados(Cliente c) {
 	return null;
 }
 
+@Override
+public Cliente consultarCliente(String correo) throws ExcepcionServiciosAlquiler {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 }

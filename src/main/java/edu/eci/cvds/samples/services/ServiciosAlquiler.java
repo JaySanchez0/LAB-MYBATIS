@@ -12,7 +12,7 @@ import java.util.List;
 public interface ServiciosAlquiler {
 
    public abstract int valorMultaRetrasoxDia(int itemId) throws UnsupportedOperationException;
-
+   public abstract Cliente consultarCliente(String correo) throws ExcepcionServiciosAlquiler;
    public abstract Cliente consultarCliente(long docu) throws ExcepcionServiciosAlquiler;
    public abstract void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler;
    /**

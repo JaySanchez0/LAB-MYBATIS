@@ -43,6 +43,10 @@ public class MyBATISClienteDAO implements ClienteDAO{
 		registrarCliente(c.getDocumento(),c.getNombre(),c.getTelefono(),c.getDireccion(),c.getEmail());
 		
 	}
+	@Override
+	public Cliente getCliente(String correo) {
+		return maper.getCliente(correo);
+	}
 
 
 }

@@ -16,4 +16,5 @@ public interface ClienteDAO {
             @Param("fin") Date fechafin);
 	public List<Cliente> consultarClientes();
 	public void agregarCliente(Cliente c);
+	public Cliente getCliente(@Param("correo") String correo);
 }

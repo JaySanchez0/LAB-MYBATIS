@@ -70,7 +70,7 @@ public class ServiciosAlquilerTest {
     				return serviciosAlquiler.consultarCliente(c.getDocumento())!=null;
     			}
     			catch(edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
-    				return true;
+    				return e.getMessage().equals("Ya existe este cliente");
     			}
     		});
     	}
