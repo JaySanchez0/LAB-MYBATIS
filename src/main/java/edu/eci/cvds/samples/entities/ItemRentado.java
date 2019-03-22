@@ -39,7 +39,6 @@ public class ItemRentado implements Serializable {
     }
 
     public Item getItem() {
-    	System.out.println(item);
         return item;
     }
 

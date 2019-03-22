@@ -76,7 +76,6 @@ public class AlquilerItemsBean extends BasePageBean{
 		try {
 			serv.registrarCliente(new Cliente(nombre, documento, telefono, direccion, email));
 		} catch (ExcepcionServiciosAlquiler e) {
-			System.out.println(e.getMessage());
 		}
 	}
 	public String redirect(Cliente c) {
@@ -110,7 +109,6 @@ public class AlquilerItemsBean extends BasePageBean{
 		try {
 			serv.registrarAlquilerCliente(new java.sql.Date(fechaEntrega.getYear(),fechaEntrega.getMonth(),fechaEntrega.getDay()), cliente.getDocumento(), it, 3);
 		}catch(Exception e) {
-			System.out.println(e.getMessage());
 		}
 	}
 }
