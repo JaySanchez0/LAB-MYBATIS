@@ -14,6 +14,12 @@
 		FROM VI_ITEMRENTADO ITR LEFT JOIN VI_ITEMS ITEM ON ITR.ITEMS_id=ITEM.id LEFT JOIN VI_TIPOITEM TIPO ON ITEM.TIPOITEM_id = TIPO.id
 		WHERE ITR.CLIENTES_documento = #{cliente.documento}
 	</select>
+	<select parameterType="map" id="getItemRentado" resultMap="ItemRentadoResult">
+		SELECT ITEM.id as item_id, ITEM.nombre as itemnombre, ITEM.descripcion as itdescripcion, fechalanzamiento,tarifaxdia,formatorenta,genero,
+		TIPO.id as titemid, TIPO.descripcion as tipodescripcion
+		FROM VI_ITEMS ITEM LEFT JOIN VI_TIPOITEM TIPO ON ITEM.TIPOITEM_id = TIPO.id
+		WHERE ITEM.id = #{id} 
+	</select>
 	<resultMap type='ItemRentado' id='ItemRentadoResult'>
 		    <id property='id' column='item_id'/>       
 		    <association property="item" javaType="Item" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult" column='item_id'>

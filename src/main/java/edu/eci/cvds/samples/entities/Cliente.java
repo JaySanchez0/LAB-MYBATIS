@@ -106,6 +106,9 @@ public class Cliente implements Serializable{
     public String toString() {
         return "Cliente{" + "nombre=" + nombre + ", documento=" + documento + ", rentados=\n\t" + rentados + '}';
     }
+    public void addItemRentado(ItemRentado item) {
+    	rentados.add(item);
+    }
 
    
     

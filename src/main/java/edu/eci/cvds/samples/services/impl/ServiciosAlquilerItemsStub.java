@@ -255,6 +255,12 @@ public Cliente consultarCliente(String correo) throws ExcepcionServiciosAlquiler
 	return null;
 }
 
+@Override
+public ItemRentado getItemRentado(int id) throws ExcepcionServiciosAlquiler {
+	// TODO Auto-generated method stub
+	return null;
+}
+
 
 
 

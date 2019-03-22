@@ -1,5 +1,6 @@
 package edu.eci.cvds.view;
 
+import java.util.ArrayList;
 import java.util.Date;
 import java.util.List;
 
@@ -27,13 +28,14 @@ public class AlquilerItemsBean extends BasePageBean{
 	private boolean vetado;
 	private Cliente cliente;
 	private int idItem;
+	private List<Cliente> clientes;
 	private Date fechaEntrega;
 	public AlquilerItemsBean() {
 		Injector i = super.getInjector();
 		serv = i.getInstance(ServiciosAlquilerImpl.class);
 	}
 	public List<Cliente> getClientes(){
-		List<Cliente> clientes=  serv.consultarClientes();
+		if(clientes==null) clientes=  serv.consultarClientes();
 		return clientes;
 	}
 	public void setNombre(String nombre) {
@@ -74,7 +76,10 @@ public class AlquilerItemsBean extends BasePageBean{
 	}
 	public void registrarCliente() {
 		try {
-			serv.registrarCliente(new Cliente(nombre, documento, telefono, direccion, email));
+			Cliente c = new Cliente(nombre, documento, telefono, direccion, email);
+			serv.registrarCliente(c);
+			clientes.add(0, c);
+			
 		} catch (ExcepcionServiciosAlquiler e) {
 		}
 	}
@@ -108,6 +113,7 @@ public class AlquilerItemsBean extends BasePageBean{
 		it.setId(idItem);
 		try {
 			serv.registrarAlquilerCliente(new java.sql.Date(fechaEntrega.getYear(),fechaEntrega.getMonth(),fechaEntrega.getDay()), cliente.getDocumento(), it, 3);
+			cliente.addItemRentado(serv.getItemRentado(idItem));
 		}catch(Exception e) {
 		}
 	}

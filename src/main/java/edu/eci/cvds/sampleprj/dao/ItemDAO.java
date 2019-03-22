@@ -20,4 +20,6 @@ public interface ItemDAO {
 
    public Item consultarItem(int id);
 
+   public ItemRentado getItemRentado(int id);
+
 }

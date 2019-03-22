@@ -61,5 +61,8 @@ public void registrarAlquilerCliente(Date date, long docu, Item item, int numdia
 public Item consultarItem(int id) {
 	return itemMapper.consultarItem(id);
 }
+public ItemRentado getItemRentado(int id) {
+	return itemRentadoMapper.getItemRentado(id);
+}
 
   }

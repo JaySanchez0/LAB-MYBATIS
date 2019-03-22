@@ -141,6 +141,13 @@ public Cliente consultarCliente(String correo) throws ExcepcionServiciosAlquiler
 	return c;
 }
 
+@Override
+public ItemRentado getItemRentado(int id) throws ExcepcionServiciosAlquiler {
+	ItemRentado it = itemDAO.getItemRentado(id);
+	if(it==null) throw new ExcepcionServiciosAlquiler("No existe item");
+	return it;
+}
+
 
 
 
