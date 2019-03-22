@@ -2,7 +2,8 @@
 #### This is a video renter app
 #### https://video-master-pro.herokuapp.com/ o https://video-master-pro.herokuapp.com/faces/registrocliente.xhtml
 ### 
-#### Nota: para los items rentados como no se sabe el valor de la llave primaria y por motivos de prueba se puso como count(*)+100 por lo que no se encontraban utilizados estos numeros
+#### Nota: 
+para los items rentados como no se sabe el valor de la llave primaria y por motivos de prueba se puso como count(*)+100 por lo que no se encontraban utilizados estos numeros
 ## My batis
 
 ### Escuela Colombiana de Ingeniería
