@@ -11,6 +11,7 @@ import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper;
 import edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper;
 import edu.eci.cvds.samples.entities.TipoItem;
+import java.sql.Date;
 import java.sql.SQLException;
 import java.util.List;
 
@@ -49,6 +50,16 @@ public class MyBATISItemDAO implements ItemDAO{
 @Override
 public List<ItemRentado> consultarItemNoEntregados(Cliente c) {
 	return itemRentadoMapper.consultarItemNoEntregados(c);
+}
+
+@Override
+public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) {
+	itemRentadoMapper.registrarAlquilerCliente(date,docu,item,numdias);
+}
+
+@Override
+public Item consultarItem(int id) {
+	return itemMapper.consultarItem(id);
 }
 
   }

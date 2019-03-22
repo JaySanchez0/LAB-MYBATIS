@@ -1,5 +1,6 @@
 package edu.eci.cvds.view;
 
+import java.util.Date;
 import java.util.List;
 
 import javax.faces.bean.ManagedBean;
@@ -9,12 +10,14 @@ import com.google.inject.Injector;
 
 import edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler;
 import edu.eci.cvds.samples.entities.Cliente;
+import edu.eci.cvds.samples.entities.Item;
+import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.services.impl.ServiciosAlquilerImpl;
 
 
 @ManagedBean(name="clienteBean")
 @SessionScoped
-public class ClienteBean extends BasePageBean{
+public class AlquilerItemsBean extends BasePageBean{
 	private ServiciosAlquilerImpl serv;
 	private long documento;
 	private String nombre;
@@ -22,7 +25,10 @@ public class ClienteBean extends BasePageBean{
 	private String telefono;
 	private String email;
 	private boolean vetado;
-	public ClienteBean() {
+	private Cliente cliente;
+	private int idItem;
+	private Date fechaEntrega;
+	public AlquilerItemsBean() {
 		Injector i = super.getInjector();
 		serv = i.getInstance(ServiciosAlquilerImpl.class);
 	}
@@ -70,6 +76,40 @@ public class ClienteBean extends BasePageBean{
 		try {
 			serv.registrarCliente(new Cliente(nombre, documento, telefono, direccion, email));
 		} catch (ExcepcionServiciosAlquiler e) {
+			System.out.println(e.getMessage());
+		}
+	}
+	public String redirect(Cliente c) {
+		cliente = c;
+		return "registroitem.xhtml?faces-redirect=true";
+	}
+	public boolean existeCliente() {
+		return cliente!=null;
+	}
+	public Cliente getCliente() {
+		return cliente;
+	}
+	public List<ItemRentado> getRentados(){
+		return cliente.getRentados();
+	}
+	public int getIdItem() {
+		return idItem;
+	}
+	public void setIdItem(int id) {
+		this.idItem = id;
+	}
+	public Date getFechaEntrega() {
+		return fechaEntrega;
+	}
+	public void setFechaEntrega(Date fecha) {
+		this.fechaEntrega = fecha;
+	}
+	public void prestarItem() {
+		Item it = new Item();
+		it.setId(idItem);
+		try {
+			serv.registrarAlquilerCliente(new java.sql.Date(fechaEntrega.getYear(),fechaEntrega.getMonth(),fechaEntrega.getDay()), cliente.getDocumento(), it, 3);
+		}catch(Exception e) {
 			System.out.println(e.getMessage());
 		}
 	}

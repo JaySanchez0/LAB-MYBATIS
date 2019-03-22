@@ -14,7 +14,7 @@ xmlns:p="http://primefaces.org/ui">
 	 	<p:column headerText="Direccion: ">${cli.getDireccion()}</p:column>
 	 	<p:column headerText="Email">${cli.getEmail()}</p:column>
 	 	<p:column headerText="vetado">${cli.isVetado()}</p:column>
-	 	<p:column headerText="Historial"><h:commandLink actionListener="#{renterBean.redirect(cli)}">Visitar</h:commandLink></p:column>
+	 	<p:column headerText="Historial"><h:commandLink action="#{clienteBean.redirect(cli)}">Visitar</h:commandLink></p:column>
 	 </p:dataTable>
 	 <br></br>
 	 <br></br>

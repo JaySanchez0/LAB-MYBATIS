@@ -20,10 +20,10 @@ public class ItemRentado implements Serializable {
     private Date fechainiciorenta;
     private Date fechafinrenta;
 
-    public ItemRentado(int id, Item item, Date fechainiciorenta, Date fechafinrenta) {
+    public ItemRentado(int id, Item item, Date date, Date fechafinrenta) {
         this.id = id;
         this.item = item;
-        this.fechainiciorenta = fechainiciorenta;
+        this.fechainiciorenta = date;
         this.fechafinrenta = fechafinrenta;
     }
 
@@ -39,6 +39,7 @@ public class ItemRentado implements Serializable {
     }
 
     public Item getItem() {
+    	System.out.println(item);
         return item;
     }
 

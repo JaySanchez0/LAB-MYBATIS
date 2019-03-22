@@ -77,11 +77,20 @@ public class ServiciosAlquilerImpl implements ServiciosAlquiler {
    }
 
    @Override
-   public void registrarAlquilerCliente(Date date, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
-       throw new UnsupportedOperationException("Not supported yet.");
+   public void registrarAlquilerCliente(Date fechaEntrega, long docu, Item item, int numdias) throws ExcepcionServiciosAlquiler {
+	   consultarCliente(docu);
+	   consultarItem(item);
+       itemDAO.registrarAlquilerCliente(fechaEntrega,docu,item,numdias);
    }
 
-   @Override
+   private Item consultarItem(Item item) throws ExcepcionServiciosAlquiler {
+	Item it = itemDAO.consultarItem(item.getId());
+	if(it==null) throw new ExcepcionServiciosAlquiler("No existe este item");
+	return it;
+	
+}
+
+@Override
    public void registrarCliente(Cliente c) throws ExcepcionServiciosAlquiler {
 	   boolean existenClientes = false;
 	   try {
@@ -131,5 +140,12 @@ public Cliente consultarCliente(String correo) throws ExcepcionServiciosAlquiler
 	if(c==null) throw new ExcepcionServiciosAlquiler("No existe Cliente.");
 	return c;
 }
+
+
+
+
+
+
+
 
 }

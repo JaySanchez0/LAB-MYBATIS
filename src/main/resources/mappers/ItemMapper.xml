@@ -9,16 +9,15 @@
 		ITEMS.id as item_id,
 		ITEM.nombre as itemnombre,ITEM.descripcion itdescripcion , fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id,
 		TIPO.id as titemid, TIPO.descripcion as tipodescripcion 
-		FROM VI_ITEMS ITEMS,VI_TIPOITEM TIPO
-		WHERE ITEMS.TIPOITEM_id = TIPO.id;
+		FROM VI_ITEMS ITEMS LEFT JOIN VI_TIPOITEM TIPO ON ITEMS.TIPOITEM_id = TIPO.id
 	</select>
 	<select parameterType="map" id="consultarItem" resultMap="ItemResult">
 		SELECT 
 		ITEMS.id as item_id,
 		ITEMS.nombre as itemnombre,ITEMS.descripcion itdescripcion , fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id,
 		TIPO.id as titemid, TIPO.descripcion as tipodescripcion 
-		FROM VI_ITEMS ITEMS,VI_TIPOITEM TIPO
-		WHERE ITEMS.TIPOITEM_id = TIPO.id AND ITEMS.id = #{iditem}
+		FROM VI_ITEMS ITEMS LEFT JOIN VI_TIPOITEM TIPO ON ITEMS.TIPOITEM_id = TIPO.id
+		WHERE ITEMS.id = #{iditem}
 	</select>
 	<insert parameterType="map" id="insertarItem">
 		INSERT INTO VI_ITEMS VALUES(#{item.id},#{item.nombre},#{item.descripcion},#{item.fechaLanzamiento},#{item.tarifaxDia},#{item.formatoRenta},#{item.genero},#{item.tipo.id});
@@ -31,7 +30,7 @@
 		    <result property='tarifaxDia' column='tarifaxdia'/>
 		    <result property='formatoRenta' column='formatorenta'/>
 		    <result property='genero' column='genero'/>          
-		    <association property="tipo" javaType="TipoItem" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult" column='TIPOITEM_id'>
+		    <association property="tipo" javaType="TipoItem" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.TipoItemMapper.TipoItemResult">
 		    </association>
 	</resultMap>
 </mapper>

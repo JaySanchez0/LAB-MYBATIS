@@ -255,4 +255,8 @@ public Cliente consultarCliente(String correo) throws ExcepcionServiciosAlquiler
 	return null;
 }
 
+
+
+
+
 }

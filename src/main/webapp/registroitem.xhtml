@@ -1,0 +1,41 @@
+<!DOCTYPE html>
+<html xmlns="http://www.w3c.org/1999/xhtml"
+xmlns:h="http://xmlns.jcp.org/jsf/html"
+xmlns:p="http://primefaces.org/ui">
+ <h:head><title>Registro Items</title></h:head>
+ <h:body style="margin:0px; padding:0px;">
+ <div style="background:#708090; padding:10px; font-weight:bold; font-size:30px; color:white;">Registro de rentas a clientes:</div>
+ <br></br>
+ <h:panelGroup rendered="#{not clienteBean.existeCliente()}">
+ <p:outputLabel>No  existe usuario por favor selecione un usuario</p:outputLabel>
+ <p:commandLink value="Ir a ver usuarios" actionListener="registrocliente.xhtml?faces-redirect=true"></p:commandLink>
+ </h:panelGroup>
+ <h:panelGroup rendered="#{clienteBean.existeCliente()}">
+ 	<h:outputLabel>
+ 	<table style="border-collapse: collapse; width:100%;" border="1">
+ 	<tr><td colspan="2" style="background:#20B2AA;">Bienvenido a los registros:</td></tr>
+ 	<tr><td>Nombre:</td><td>#{clienteBean.getCliente().getNombre()}</td></tr>
+ 	<tr><td>Documento:</td><td> #{clienteBean.getCliente().getDocumento()}</td></tr>
+ 	<tr><td>Telefono:</td><td> #{clienteBean.getCliente().getTelefono()}</td></tr>
+ 	<tr><td>Direccion:</td><td> #{clienteBean.getCliente().getDireccion()}</td></tr>
+ 	<tr><td>Email:</td><td> #{clienteBean.getCliente().getEmail()}</td></tr>
+ 	</table>
+ 	<br></br>
+ 	</h:outputLabel>
+ 	<h:form id="item_form">
+ 	<p:dataTable value="#{clienteBean.getCliente().getRentados()}" var="iRentado">
+	 	<p:column headerText="id">${iRentado.getId()}</p:column>
+	 	<p:column headerText="Nombre item:">${iRentado.getItem().getNombre()}</p:column>
+	 	<p:column headerText="Descripcion item:">${iRentado.getItem().getDescripcion()}</p:column>
+	 </p:dataTable>
+	 <br></br>
+	 <table>
+	 	<tr><td colspan="2">Regitro de un nuevo item</td></tr>
+	 	<tr><td>Item id</td><td><h:inputText value="#{clienteBean.idItem}"></h:inputText></td></tr>
+	 	<tr>Fecha entrega:<td></td><td><p:calendar value="#{clienteBean.fechaEntrega}"></p:calendar></td></tr>
+	 	<tr><td colspan="2"><h:commandLink actionListener="#{clienteBean.prestarItem()}">Agregar Prestamo.</h:commandLink></td></tr>
+	 </table>
+	 </h:form>
+ </h:panelGroup>
+ </h:body>
+</html>

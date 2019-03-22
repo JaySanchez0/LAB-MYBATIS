@@ -58,6 +58,7 @@ public class Item implements Serializable{
 
 
     public String getNombre() {
+    	System.out.println(nombre);
         return nombre;
     }
 

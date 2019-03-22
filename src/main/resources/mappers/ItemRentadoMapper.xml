@@ -4,12 +4,15 @@
   "http://mybatis.org/dtd/mybatis-3-mapper.dtd">
   
 <mapper namespace="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemRentadoMapper">
+	<insert parameterType="map" id="registrarAlquilerCliente">
+		INSERT INTO VI_ITEMRENTADO SELECT COUNT(*)+100,#{documento},#{item.id},NOW(),#{date},NULL FROM VI_ITEMRENTADO;
+	</insert>
 	<select id="consultarItemNoEntregados" parameterType="map" resultMap="ItemRentadoResult">
 		SELECT ITEM.id as item_id,
 		ITEM.nombre as itemnombre,ITEM.descripcion itdescripcion , fechalanzamiento,tarifaxdia,formatorenta,genero,TIPOITEM_id,
 		TIPO.id as titemid, TIPO.descripcion as tipodescripcion 
-		FROM VI_ITEMRENTADO ITR ,VI_ITEMS ITEM, VI_TIPOITEM TIPO
-		WHERE ITR.CLIENTES_documento = #{cliente.documento} AND ITR.ITEMS_id=ITEM.id AND ITEM.TIPOITEM_id = TIPO.id
+		FROM VI_ITEMRENTADO ITR LEFT JOIN VI_ITEMS ITEM ON ITR.ITEMS_id=ITEM.id LEFT JOIN VI_TIPOITEM TIPO ON ITEM.TIPOITEM_id = TIPO.id
+		WHERE ITR.CLIENTES_documento = #{cliente.documento}
 	</select>
 	<resultMap type='ItemRentado' id='ItemRentadoResult'>
 		    <id property='id' column='item_id'/>       
