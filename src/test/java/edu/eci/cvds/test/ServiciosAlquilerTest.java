@@ -74,5 +74,25 @@ public class ServiciosAlquilerTest {
     			}
     		});
     	}
+    	@Test
+    	public void nodeberiaPermitirIngresarClientesRepetidos() {
+    		qt().forAll(clientesArray()).check(cli ->{
+    			for(Cliente c:cli) {
+    				try {
+        				serviciosAlquiler.registrarCliente(c);
+        			}
+    				catch(edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
+        			}
+    			}
+    			try {
+    				serviciosAlquiler.registrarCliente(cli[0]);
+    				return false;
+    			}
+				catch(edu.eci.cvds.sampleprj.dao.ExcepcionServiciosAlquiler e) {
+					return true;
+    			}
+    			
+    		});
+    	}
     	
 }
