@@ -7,6 +7,7 @@ package edu.eci.cvds.samples.entities;
 
 import java.io.Serializable;
 import java.sql.Date;
+import java.util.Calendar;
 
 /**
  *
@@ -66,7 +67,17 @@ public class ItemRentado implements Serializable {
     public String toString() {
         return "ItemRentado{" + "id=" + id + ", item=" + item + ", fechainiciorenta=" + fechainiciorenta + ", fechafinrenta=" + fechafinrenta + '}';
     }
-
+    public double getMulta() {
+    	java.util.Date actual = Calendar.getInstance().getTime();
+    	if(fechafinrenta.before(actual)) {
+    		int daysYears = (actual.getYear()-fechafinrenta.getYear()-1)*365;
+    		int daysMounth = Math.abs(actual.getMonth()-fechafinrenta.getMonth())*30;
+    		int daysd = Math.abs(actual.getDay()-fechafinrenta.getDay());
+    		return (daysYears+daysMounth+daysd)*1.1*item.getTarifaxDia();
+    	}else {
+    		return 0;
+    	}
+    }
     
     
 }

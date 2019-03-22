@@ -21,7 +21,9 @@
 		WHERE ITEM.id = #{id} 
 	</select>
 	<resultMap type='ItemRentado' id='ItemRentadoResult'>
-		    <id property='id' column='item_id'/>       
+		    <id property='id' column='item_id'/>
+		    <result property="fechainiciorenta" column="fechainiciorenta"></result>
+		    <result property="fechafinrenta" column="fechafinrenta"></result>     
 		    <association property="item" javaType="Item" resultMap="edu.eci.cvds.sampleprj.dao.mybatis.mappers.ItemMapper.ItemResult" column='item_id'>
 		    </association>
 	</resultMap>

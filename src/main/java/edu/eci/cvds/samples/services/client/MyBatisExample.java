@@ -37,7 +37,7 @@ import edu.eci.cvds.samples.entities.ItemRentado;
 import edu.eci.cvds.samples.services.ServiciosAlquiler;
 import edu.eci.cvds.samples.services.ServiciosAlquilerFactory;
 
-
+import java.util.Calendar;
 
 /**
  *
@@ -71,7 +71,7 @@ public class MyBatisExample {
      * @throws SQLException 
      */
     public static void main(String args[]) throws SQLException {
-        SqlSessionFactory sessionfact = getSqlSessionFactory();
+        /*SqlSessionFactory sessionfact = getSqlSessionFactory();
 
         SqlSession sqlss = sessionfact.openSession();
 
@@ -96,7 +96,9 @@ public class MyBatisExample {
 			}
 		} catch (ExcepcionServiciosAlquiler e) {
 			e.printStackTrace();
-		}
+		}*/
+		java.util.Date dat= Calendar.getInstance().getTime();
+		System.out.println(dat.toString());
         }
         
     }

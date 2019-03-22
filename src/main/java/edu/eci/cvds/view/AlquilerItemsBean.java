@@ -1,6 +1,7 @@
 package edu.eci.cvds.view;
 
 import java.util.ArrayList;
+import java.util.Calendar;
 import java.util.Date;
 import java.util.List;
 
@@ -113,7 +114,11 @@ public class AlquilerItemsBean extends BasePageBean{
 		it.setId(idItem);
 		try {
 			serv.registrarAlquilerCliente(new java.sql.Date(fechaEntrega.getYear(),fechaEntrega.getMonth(),fechaEntrega.getDay()), cliente.getDocumento(), it, 3);
-			cliente.addItemRentado(serv.getItemRentado(idItem));
+			ItemRentado item = serv.getItemRentado(idItem);
+			item.setFechafinrenta(new java.sql.Date(fechaEntrega.getYear(),fechaEntrega.getMonth(),fechaEntrega.getDay()));
+			java.util.Date dat = Calendar.getInstance().getTime();
+			item.setFechainiciorenta(new java.sql.Date(dat.getYear(),dat.getMonth(),dat.getDay()));
+			cliente.addItemRentado(item);
 		}catch(Exception e) {
 		}
 	}
